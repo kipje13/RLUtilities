@@ -63,6 +63,10 @@ public:
     }
   }
 
+  bool operator==(const vec<2> &other) const {
+	  return x == other.x && y == other.y;
+  }
+
   // elementwise addition
   vec<2> operator+(const vec<2> &other) const {
     return vec<2>(x + other.x, 
@@ -121,5 +125,35 @@ public:
     return *this;
   }
 };
+
+inline vec<2> cross(const vec<2> &a) {
+  return vec<2>(-a(1), a(0));
+}
+
+inline float dot(const vec<2> &u, const vec<2> &v) {
+  return u.x * v.x + u.y * v.y;
+}
+
+inline vec<2> operator*(const vec<2> &v, const float other) {
+  return vec<2>(v.x * other, v.y * other);
+}
+
+inline vec<2> operator*(const float other, const vec<2> &v) {
+  return vec<2>(other * v.x, other * v.y);
+}
+
+inline vec<2> operator/(const vec<2> &v, const float other) {
+  return vec<2>(v.x / other, v.y / other);
+}
+
+inline vec<2> operator/(const float other, const vec<2> &v) {
+  return vec<2>(other / v.x, other / v.y);
+}
+
+inline vec<2> clamp(const vec<2> &v, const float min_value,
+                    const float max_value) {
+  return vec<2>(std::clamp(v.x, min_value, max_value),
+                std::clamp(v.y, min_value, max_value));
+}
 
 typedef vec<2> vec2;

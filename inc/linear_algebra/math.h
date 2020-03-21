@@ -8,20 +8,6 @@
 #include "vec3.h"
 #include "mat.h"
 
-inline vec<3> cross(const vec<3> &a, const vec<3> &b) {
-  return vec<3>(a.y * b.z - a.z * b.y, 
-                a.z * b.x - a.x * b.z,
-                a.x * b.y - a.y * b.x);
-}
-
-inline vec<3> cross(const vec<3> &a) { 
-	return vec<3>(-a(1), a(0), 0.0f); 
-}
-
-inline vec<2> cross(const vec<2> &a) { 
-	return vec<2>(-a(1), a(0)); 
-}
-
 inline float det(const vec<2> &a, const vec<2> &b) {
   return a(0) * b(1) - a(1) * b(0);
 }
@@ -41,42 +27,6 @@ inline vec<n> normalize(const vec<n> &v) {
   }
 }
 
-template <int n> 
-inline vec<n> operator*(const vec<n> &v, const float other) {
-  vec<n> u;
-  for (int i = 0; i < n; i++) {
-    u(i) = other * v(i);
-  }
-  return u;
-}
-
-template <int n> 
-inline vec<n> operator*(const float other, const vec<n> &v) {
-  vec<n> u;
-  for (int i = 0; i < n; i++) {
-    u(i) = other * v(i);
-  }
-  return u;
-}
-
-template <int n> 
-inline vec<n> operator/(const vec<n> &v, const float other) {
-  vec<n> u;
-  for (int i = 0; i < n; i++) {
-    u(i) = v(i) / other;
-  }
-  return u;
-}
-
-template <int n> 
-inline vec<n> operator/(const float other, const vec<n> &v) {
-  vec<n> u;
-  for (int i = 0; i < n; i++) {
-    u(i) = other / v(i);
-  }
-  return u;
-}
-
 inline float atan2(const vec2 &v) { 
 	return std::atan2(v.y, v.x); 
 }
@@ -88,14 +38,6 @@ inline float dot(const vec<n> &u, const vec<n> &v) {
     a += u[i] * v[i];
   }
   return a;
-}
-
-inline float dot(const vec<2> &u, const vec<2> &v) {
-  return u.x * v.x + u.y * v.y;
-}
-
-inline float dot(const vec<3> &u, const vec<3> &v) {
-  return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
 template <int d> 
@@ -143,6 +85,19 @@ inline vec < n > dot(const vec < m > & v,
 
 }
 
+inline vec3 dot(const vec3 & v, 
+                const mat<3, 3> & A) {
+  return vec3(dot(vec3(A(0, 0), A(1, 0), A(2, 0)), v),
+              dot(vec3(A(0, 1), A(1, 1), A(2, 1)), v),
+              dot(vec3(A(0, 2), A(1, 2), A(2, 2)), v));
+}
+
+inline vec2 dot(const vec2 & v, 
+                const mat<2, 2> & A) {
+  return vec2(dot(vec2(A(0, 0), A(1, 0)), v),
+              dot(vec2(A(0, 1), A(1, 1)), v));
+}
+
 template < int m, int n >
 inline vec < m > dot(const mat < m, n > & A,
   const vec < n > & v) {
@@ -158,6 +113,19 @@ inline vec < m > dot(const mat < m, n > & A,
 
   return Av;
 
+}
+
+inline vec3 dot(const mat<3,3> & A,
+                const vec3 & v) {
+  return vec3(dot(vec3(A(0, 0), A(0, 1), A(0, 2)), v),
+              dot(vec3(A(1, 0), A(1, 1), A(1, 2)), v),
+              dot(vec3(A(2, 0), A(2, 1), A(2, 2)), v));
+}
+
+inline vec2 dot(const mat<2, 2> & A,
+                const vec2 & v) {
+  return vec2(dot(vec2(A(0, 0), A(0, 1)), v),
+              dot(vec2(A(1, 0), A(1, 1)), v));
 }
 
 template < int m, int n >

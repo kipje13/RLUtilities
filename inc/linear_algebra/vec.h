@@ -115,4 +115,40 @@ public:
   }
 };
 
+template <int n> 
+inline vec<n> operator*(const vec<n> &v, const float other) {
+  vec<n> u;
+  for (int i = 0; i < n; i++) {
+    u(i) = other * v(i);
+  }
+  return u;
+}
+
+template <int n> 
+inline vec<n> operator*(const float other, const vec<n> &v) {
+  vec<n> u;
+  for (int i = 0; i < n; i++) {
+    u(i) = other * v(i);
+  }
+  return u;
+}
+
+template <int n> 
+inline vec<n> operator/(const vec<n> &v, const float other) {
+  vec<n> u;
+  for (int i = 0; i < n; i++) {
+    u(i) = v(i) / other;
+  }
+  return u;
+}
+
+template <int n> 
+inline vec<n> operator/(const float other, const vec<n> &v) {
+  vec<n> u;
+  for (int i = 0; i < n; i++) {
+    u(i) = other / v(i);
+  }
+  return u;
+}
+
 typedef vec<4> vec4;
