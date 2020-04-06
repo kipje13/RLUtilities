@@ -1,4 +1,4 @@
-#include "misc/resource.h"
+#include "rlu/misc/resource.h"
 
 SOCCAR_CORNER_IDS BINARY_FILE soccar/soccar_corner_ids.bin
 SOCCAR_CORNER_VERTICES BINARY_FILE soccar/soccar_corner_vertices.bin

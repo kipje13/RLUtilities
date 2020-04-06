@@ -57,7 +57,7 @@ if (TARGET_LANGUAGE STREQUAL "cpp" OR TARGET_LANGUAGE STREQUAL "both")
     ${PROJECT_SOURCE_DIR}/src/rlbot/renderer.cc
     ${PROJECT_SOURCE_DIR}/src/rlbot/statesetting.cc
   )
-  target_include_directories(rlutilities_cpp PUBLIC inc)
+  target_include_directories(rlutilities_cpp PRIVATE inc/rlu PUBLIC inc)
   target_compile_features(rlutilities_cpp PUBLIC cxx_std_17)
   target_link_libraries(rlutilities_cpp PUBLIC Xinput)
   if (CMAKE_CXX_COMPILER_ID EQUAL MSVC)
